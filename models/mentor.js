@@ -12,7 +12,16 @@ const mentorSchema = new mongoose.Schema(
       type: String, 
       unique: true, 
     },
+    mentorias: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Mentoria',
+      }
+    ]
   },
+  {
+    timestamps: true
+  }
 );
 
 const Mentor = mongoose.model('Mentor', mentorSchema);

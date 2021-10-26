@@ -4,10 +4,10 @@ const Mentor = require('../models/mentor.js');
 const mentorRouter = express.Router();
 
 mentorRouter.post('/', async (req, res) => {
-  const { name, email } = req.body
+  const { name, email, mentorias } = req.body
 
   const newMentor = new Mentor({
-    name, email
+    name, email, mentorias
   })
 
   const savedMentor= await newMentor.save();
@@ -17,7 +17,7 @@ mentorRouter.post('/', async (req, res) => {
 })
 
 mentorRouter.get('/', async (req, res) => {
-  const Mentores = await Mentor.find().sort({ name: 1});
+  const Mentores = await Mentor.find().populate('mentorias');
   if (Mentores) {
     res.status(200).json({ error: false, Mentores });
   } else {
@@ -29,7 +29,7 @@ mentorRouter.get('/', async (req, res) => {
 
 mentorRouter.get('/:id', async (req, res) => {
   const id = req.params.id
-  const foundMentor = await Mentor.findOne({ _id: id })
+  const foundMentor = await Mentor.findOne({ _id: id }).populate('mentorias');
   if (foundMentor) {
     res.status(200).json({ error: false, foundMentor });
   } else {

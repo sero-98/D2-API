@@ -13,6 +13,9 @@ const mentorizadoSchema = new mongoose.Schema(
       unique: true, 
     },
   },
+  {
+    timestamps: true
+  }
 );
 
 const Mentorizado = mongoose.model('Mentorizado', mentorizadoSchema);
