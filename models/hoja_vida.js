@@ -16,6 +16,9 @@ const hoja_vidaSchema = new mongoose.Schema(
       type: String, 
       required: true 
     },
+  },
+  {
+    timestamps: true
   }
 );
 

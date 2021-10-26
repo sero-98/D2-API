@@ -16,7 +16,14 @@ const mentoriaSchema = new mongoose.Schema(
     plan_accion: { 
       type: String, 
       required: true 
+    },
+    mentor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Mentor',
     }
+  },
+  {
+    timestamps: true
   }
 );
 

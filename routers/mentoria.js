@@ -4,10 +4,10 @@ const Mentoria = require('../models/mentoria.js');
 const mentoriaRouter = express.Router();
 
 mentoriaRouter.post('/', async (req, res) => {
-  const { comentario, plan_estrategico, plan_accion } = req.body
+  const { comentario, plan_estrategico, plan_accion, mentor } = req.body
 
   const newMentoria = new Mentoria({
-    comentario, plan_estrategico, plan_accion
+    comentario, plan_estrategico, plan_accion, mentor
   })
 
   const savedMentoria= await newMentoria.save();
@@ -17,7 +17,7 @@ mentoriaRouter.post('/', async (req, res) => {
 })
 
 mentoriaRouter.get('/', async (req, res) => {
-  const Mentorias = await Mentoria.find();
+  const Mentorias = await Mentoria.find().populate('mentor');
   if (Mentorias) {
     res.status(200).json({ error: false, Mentorias });
   } else {
@@ -29,7 +29,7 @@ mentoriaRouter.get('/', async (req, res) => {
 
 mentoriaRouter.get('/:id', async (req, res) => {
   const id = req.params.id
-  const foundMentoria = await Mentoria.findOne({ _id: id })
+  const foundMentoria = await Mentoria.findOne({ _id: id }).populate('mentor');
   if (foundMentoria) {
     res.status(200).json({ error: false, foundMentoria });
   } else {
