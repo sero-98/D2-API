@@ -17,6 +17,10 @@ mentorizadoRouter.post('/send-email', async (req, res) => {
             <li>PhoneNumber: ${phone}</li>
         </ul>
         <p>${message}</p>
+        <br>
+        <h2>si quieres ser parte de esta gran oportunidad ingresa aquí y registrate ya!!!!!</h2>
+        <br>
+        <h2>http://localhost:3002/</h2>
     `;
 
     let transporter = nodemailer.createTransport({
